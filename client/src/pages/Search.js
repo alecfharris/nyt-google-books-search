@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import Global from "../components/Global";
+import Search from "../components/Search";
 
-class Search extends Component {
+class SearchPage extends Component {
     render() {
         return (
-            <Global/>
+            <Search/>
         )
     }
 }
 
-export default Search;
+export default SearchPage;

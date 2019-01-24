@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Save from "./Save";
-import API from "../utils/API";
+import Save from "../Save";
+import API from "../../utils/API";
 
 class Gallery extends Component {
     saveBook(props) {
