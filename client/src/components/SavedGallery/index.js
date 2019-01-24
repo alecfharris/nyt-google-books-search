@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import Delete from "../Delete";
 import API from "../../utils/API";
 
-// TODO Set up divs to contain saved items and add components that allow for deleting saved items
 class SavedGallery extends Component {
     state = {
         items: [],
-        promiseIsResolved: false,
+        promiseIsResolved: false     
     };
 
-    loadSaved() {
-        
+    deleteSaved(props) {
+        API.deleteBook(props.id)
+        .then(
+             this.setState({items: this.state.items.filter(item => item._id !== props.id)}))
     }
 
    componentDidMount(){
@@ -17,23 +19,6 @@ class SavedGallery extends Component {
             this.setState({ items: res.data})}))
             .then(this.setState({promiseIsResolved: true}));
     }
-
-    // generateSavedItems(items){
-    //     const itemsArray = [];
-    //     for (let i=0; i<items.length; i++) {
-    //         const item = {
-    //             authors: items[i].authors,
-    //             description: items[i].description,
-    //             image: items[i].image,
-    //             link: items[i].link,
-    //             title: items[i].title[0],
-    //             id: items[i]._id
-    //         }
-
-    //         itemsArray.push(item);
-    //     }
-    //     return itemsArray;
-    // }
 
     render() {
         let altImage = 'http://icons.iconarchive.com/icons/dtafalonso/android-lollipop/256/Play-Books-icon.png';
@@ -44,22 +29,18 @@ class SavedGallery extends Component {
             {
                 
                 this.state.items.map((item, index) => {
-                    console.log(item);
-                    let { authors, title, image, link, description, id } = item;
+                    let { authors, title, image, link, description, _id } = item;
                     let bookTitle = item.title;
                     return (
                         <div key={index} className="col-sm-12 col-md-4 col-lg-3 book-column">
                             <div className="book-wrapper">
-                                {/* <Save
-                                    title={item.volumeInfo.title}
-                                    authors={item.volumeInfo.authors}
-                                    description={item.volumeInfo.description}
-                                    image={item.volumeInfo.image}
-                                    link={item.volumeInfo.link}
-                                    saveBook={this.saveBook} /> */}
+                                {<Delete
+                                    id={item._id}
+                                    deleteSaved={this.deleteSaved.bind(this)}
+                                />}
                                 <a className="book" href={link} target="_blank">
                                     <div className="book-image-wrapper">
-                                        <img src={image !== undefined ? image[0].thumbnail : altImage}
+                                        <img src={image[0] !== undefined ? image[0].thumbnail : altImage}
                                             alt="Book Image"
                                             className="book-image"
                                         />
