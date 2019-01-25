@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Delete from "../Delete";
 import API from "../../utils/API";
+import "./style.css"
 
 class SavedGallery extends Component {
     state = {
@@ -22,22 +23,32 @@ class SavedGallery extends Component {
 
     render() {
         let altImage = 'http://icons.iconarchive.com/icons/dtafalonso/android-lollipop/256/Play-Books-icon.png';
+        // Prevents page from loading until GET request is complete, preventing error
         if(!this.state.promiseIsResolved){return null}
         else{
     return (
         <div className="book-list-wrapper">
-            {
-                
+        <div className="col-sm-12">
+                <p className="search-status">Saved Items</p>
+        </div>
+            {  
                 this.state.items.map((item, index) => {
                     let { authors, title, image, link, description, _id } = item;
                     let bookTitle = item.title;
                     return (
-                        <div key={index} className="col-sm-12 col-md-4 col-lg-3 book-column">
+                        <div key={index} className="col-sm-12 col-md-4 col-lg-12 book-column">
                             <div className="book-wrapper">
                                 {<Delete
                                     id={item._id}
                                     deleteSaved={this.deleteSaved.bind(this)}
                                 />}
+                                <a className="book" href={link} target="_blank">
+                                <div className="book-title white-text">
+                                        <h3>{bookTitle}</h3>
+                                    </div>
+                                </a>
+                                <p><strong>Author: </strong>{authors}</p>
+                                <div className="book-inner-flex">
                                 <a className="book" href={link} target="_blank">
                                     <div className="book-image-wrapper">
                                         <img src={image[0] !== undefined ? image[0].thumbnail : altImage}
@@ -45,13 +56,12 @@ class SavedGallery extends Component {
                                             className="book-image"
                                         />
                                     </div>
-                                    <div className="book-title white-text">
-                                        <h3>{bookTitle}</h3>
-                                    </div>
+                                    
                                 </a>
-                                <p><strong>Author: </strong>{authors}</p>
-                                <p><strong>Description:</strong></p>
-                                {description}
+                                <div className="description">                        
+                                    <div><strong>Description:</strong></div>
+                                    {description}</div>
+                                </div>
 
                             </div>
                         </div>

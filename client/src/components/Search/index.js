@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, InputGroup, Glyphicon} from 'react-bootstrap';
 import Gallery from '../Gallery';
+import Logo from "../Logo";
+import "./style.css";
 
 
 class Search extends Component{
@@ -27,10 +29,7 @@ class Search extends Component{
     render () {
         return (
             <div className="global">
-                <div className="logo">
-                    <img src="http://icons.iconarchive.com/icons/dtafalonso/android-lollipop/256/Play-Books-icon.png"/>
-                    <h1 className="logo-text"> Google Play Book Explorer </h1>
-                </div>
+            <Logo />
                 <FormGroup>
                     <InputGroup>
                         <FormControl 
