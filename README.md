@@ -8,3 +8,6 @@ Navigate using the tabs at the top of page. On the search page, search for a boo
 
 ## Deployed Project
 The deployed project can be found [here](https://react-google-books-search-afh.herokuapp.com/).
+
+## Example Image
+![React Google Books Search](https://i.ibb.co/J5Vzc8J/React-Google-Books-Search-Resize-50.png)
